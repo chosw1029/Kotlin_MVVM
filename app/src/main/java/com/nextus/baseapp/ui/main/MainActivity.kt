@@ -19,7 +19,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNavigator {
 
     private val mMainViewModel: MainViewModel by viewModel()
-    private val adapter = GistsRecyclerAdapter()
+    private val mRecyclerAdapter = GistsRecyclerAdapter()
 
     override fun getLayoutId(): Int {
         return R.layout.activity_main
@@ -43,12 +43,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
     override fun setUp() {
         // RecyclerView 의 각 Item 에 대한 클릭 이벤트 설정
         // Click Event 가 발생한 View, Adapter 에 적용된 Data Model Class, Click Event 가 발생한 Position 을 인자로 사용
-        adapter.setOnItemClickListener { view, gistsPublic, i ->
+        mRecyclerAdapter.setOnItemClickListener { view, gistsPublic, i ->
             Toast.makeText(view.context, "$i) $gistsPublic", Toast.LENGTH_SHORT).show()
         }
 
         getViewDataBinding().gistsPublicRecycler.apply {
-            adapter = adapter
+            adapter = mRecyclerAdapter
             layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
         }
     }

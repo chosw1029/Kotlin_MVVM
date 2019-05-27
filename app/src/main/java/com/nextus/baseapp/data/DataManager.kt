@@ -1,7 +1,6 @@
 package com.nextus.baseapp.data
 
 import com.nextus.baseapp.data.model.GistsPublic
-import com.nextus.baseapp.data.model.User
 import com.rx2androidnetworking.Rx2AndroidNetworking
 import io.reactivex.Single
 
