@@ -47,9 +47,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
             Toast.makeText(view.context, "$i) $gistsPublic", Toast.LENGTH_SHORT).show()
         }
 
-        getViewDataBinding().gistsPublicRecycler.adapter = adapter
-        getViewDataBinding().gistsPublicRecycler.layoutManager =
-            LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        getViewDataBinding().gistsPublicRecycler.apply {
+            adapter = adapter
+            layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
+        }
     }
 
     // MutableLiveData 를 이용하여 api 호출 결과가 업데이트 된 경우 이를 RecyclerView 에 적용

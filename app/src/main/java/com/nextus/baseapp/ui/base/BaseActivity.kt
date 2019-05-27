@@ -32,6 +32,7 @@ abstract class BaseActivity<T: ViewDataBinding, V: BaseViewModel<*>> : AppCompat
 
     private fun performDataBinding() {
         mViewDataBinding = DataBindingUtil.setContentView(this, getLayoutId())
+        mViewDataBinding.lifecycleOwner = this
         mViewDataBinding.setVariable(getBindingVariable(), getViewModel())
         mViewDataBinding.executePendingBindings()
     }
