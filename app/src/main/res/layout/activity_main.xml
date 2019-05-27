@@ -13,8 +13,10 @@
         tools:context=".ui.main.MainActivity">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/gistsPublicRecycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:gistsPublicListAdapter="@{viewModel.gistsPublicObservableList}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

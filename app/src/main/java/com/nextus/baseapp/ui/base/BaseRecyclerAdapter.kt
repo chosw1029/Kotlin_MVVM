@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import java.util.*
 
-class BaseRecyclerAdapter<T> : RecyclerView.Adapter<BaseRecyclerAdapter.ViewHolder<T>>() {
+open class BaseRecyclerAdapter<T> : RecyclerView.Adapter<BaseRecyclerAdapter.ViewHolder<T>>() {
 
     companion object {
         const val VIEW_TYPE_EMPTY = 0
@@ -15,11 +15,15 @@ class BaseRecyclerAdapter<T> : RecyclerView.Adapter<BaseRecyclerAdapter.ViewHold
     private var onItemClickListener : OnItemClickListener<T>? = null
 
     interface OnItemClickListener<T> {
-        fun onItemClick(view: View, position: Int, type: Int)
+        fun onItemClick(view: View, item: T, position: Int)
     }
 
-    fun setOnItemClickListener(onItemClickListener: OnItemClickListener<T>) {
-        this.onItemClickListener = onItemClickListener
+    fun setOnItemClickListener(listener: (View, T, Int) -> Unit) {
+        this.onItemClickListener = object: OnItemClickListener<T> {
+            override fun onItemClick(view: View, item: T, position: Int) {
+                listener(view, item, position)
+            }
+        }
     }
 
     fun getOnItemClickListener() : OnItemClickListener<T>? {
@@ -27,10 +31,6 @@ class BaseRecyclerAdapter<T> : RecyclerView.Adapter<BaseRecyclerAdapter.ViewHold
     }
 
     private var items = Collections.emptyList<T>()
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<T> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
     override fun getItemCount(): Int {
         return if(items.isEmpty()) 1 else items.size
@@ -40,6 +40,10 @@ class BaseRecyclerAdapter<T> : RecyclerView.Adapter<BaseRecyclerAdapter.ViewHold
         return if(items.isEmpty()) VIEW_TYPE_EMPTY else VIEW_TYPE_NORMAL
     }
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<T> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun onBindViewHolder(holder: ViewHolder<T>, position: Int) {
         if(getItemViewType(position) == VIEW_TYPE_NORMAL)
             holder.populate(items[position], position)
@@ -47,24 +51,24 @@ class BaseRecyclerAdapter<T> : RecyclerView.Adapter<BaseRecyclerAdapter.ViewHold
 
     fun updateList(itemList: List<T>) {
         items = itemList
+        notifyDataSetChanged()
     }
 
     fun getItems() : List<T> {
         return items
     }
 
-    class ViewHolder<T>(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    abstract class ViewHolder<T>(itemView: View, private var baseRecyclerAdapter: BaseRecyclerAdapter<T>) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
         init {
             itemView.setOnClickListener(this)
         }
 
-        fun populate(item: T, position: Int) {
+        abstract fun populate(item: T, position: Int)
 
+        override fun onClick(v: View) {
+            baseRecyclerAdapter.onItemClickListener?.onItemClick(v, baseRecyclerAdapter.items[adapterPosition], adapterPosition)
         }
 
-        override fun onClick(v: View?) {
-
-        }
     }
 }
