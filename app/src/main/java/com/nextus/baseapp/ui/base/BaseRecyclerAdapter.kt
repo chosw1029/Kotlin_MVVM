@@ -58,7 +58,10 @@ open class BaseRecyclerAdapter<T> : RecyclerView.Adapter<BaseRecyclerAdapter.Vie
         return items
     }
 
-    abstract class ViewHolder<T>(itemView: View, private var baseRecyclerAdapter: BaseRecyclerAdapter<T>) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    abstract class ViewHolder<T>(
+        itemView: View,
+        private var baseRecyclerAdapter: BaseRecyclerAdapter<T>
+    ): RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
         init {
             itemView.setOnClickListener(this)

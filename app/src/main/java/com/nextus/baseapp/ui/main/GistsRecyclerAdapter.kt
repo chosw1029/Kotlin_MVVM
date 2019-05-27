@@ -19,21 +19,24 @@ class GistsRecyclerAdapter : BaseRecyclerAdapter<GistsPublic>() {
         }
     }
 
-    class GistsPublicViewHolder(private var itemGistsBinding: ItemGistsBinding, baseRecyclerAdapter: BaseRecyclerAdapter<GistsPublic>)
-        : ViewHolder<GistsPublic>(itemGistsBinding.root, baseRecyclerAdapter) {
+    class GistsPublicViewHolder(
+        private var itemGistsBinding: ItemGistsBinding,
+        baseRecyclerAdapter: BaseRecyclerAdapter<GistsPublic>
+    ): ViewHolder<GistsPublic>(itemGistsBinding.root, baseRecyclerAdapter) {
 
         override fun populate(item: GistsPublic, position: Int) {
-            //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             itemGistsBinding.data = item
         }
 
     }
 
-    class EmptyViewHolder(itemEmptyBinding: ItemEmptyBinding, baseRecyclerAdapter: BaseRecyclerAdapter<GistsPublic>)
-        : ViewHolder<GistsPublic>(itemEmptyBinding.root, baseRecyclerAdapter) {
+    class EmptyViewHolder(
+        itemEmptyBinding: ItemEmptyBinding,
+        baseRecyclerAdapter: BaseRecyclerAdapter<GistsPublic>
+    ): ViewHolder<GistsPublic>(itemEmptyBinding.root, baseRecyclerAdapter) {
 
         override fun populate(item: GistsPublic, position: Int) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
         }
 
     }
