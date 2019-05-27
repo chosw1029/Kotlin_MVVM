@@ -30,7 +30,7 @@ abstract class BaseFragment<T: ViewDataBinding, V: BaseViewModel<*>> : Fragment(
 
     abstract fun setUp()
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         if(context is BaseActivity<*, *>) {
             mActivity = context
