@@ -8,47 +8,43 @@
         <variable name="viewModel" type="com.nextus.baseapp.ui.main.MainViewModel"/>
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.main.MainActivity">
 
-        <FrameLayout
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="?android:actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/gistsPublicRecycler"
+            <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:gistsPublicListAdapter="@{viewModel.gistsPublicObservableList}"/>
+                android:layout_height="match_parent" />
+        </com.google.android.material.appbar.AppBarLayout>
 
-            <FrameLayout
-                android:id="@+id/outer"
-                android:background="#aaFFFFFF"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="@{viewModel.mIsLoading ? View.VISIBLE : View.GONE}" >
+        <fragment
+            android:id="@+id/navHostfragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+            app:navGraph="@navigation/navigation_graph"/>
 
-                <androidx.core.widget.ContentLoadingProgressBar
-                    android:id="@+id/progress"
-                    style="?android:attr/progressBarStyleLarge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"/>
-
-            </FrameLayout>
-
-        </FrameLayout>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigation"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="16dp"
-            android:onClick="@{() -> viewModel.actionClickTest()}"
-            android:layout_gravity="end|bottom"/>
+            android:layout_gravity="bottom"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/menu_bottom_navigation_view" />
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

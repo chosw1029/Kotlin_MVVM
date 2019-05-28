@@ -1,15 +1,13 @@
 package com.nextus.baseapp.ui.main
 
-import android.os.Bundle
-import android.widget.Toast
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import com.nextus.baseapp.BR
 import com.nextus.baseapp.R
 import com.nextus.baseapp.databinding.ActivityMainBinding
 import com.nextus.baseapp.ui.base.BaseActivity
 import com.nextus.baseapp.utils.AppLogger
+import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -19,7 +17,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNavigator {
 
     private val mMainViewModel: MainViewModel by viewModel()
-    private val mRecyclerAdapter = GistsRecyclerAdapter()
 
     override fun getLayoutId(): Int {
         return R.layout.activity_main
@@ -34,30 +31,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
         return BR.viewModel
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        subscribeData()
-    }
-
-    // 일반적인 설정 작업 코드를 작성
     override fun setUp() {
-        // RecyclerView 의 각 Item 에 대한 클릭 이벤트 설정
-        // Click Event 가 발생한 View, Adapter 에 적용된 Data Model Class, Click Event 가 발생한 Position 을 인자로 사용
-        mRecyclerAdapter.setOnItemClickListener { view, gistsPublic, i ->
-            Toast.makeText(view.context, "$i) $gistsPublic", Toast.LENGTH_SHORT).show()
-        }
-
-        getViewDataBinding().gistsPublicRecycler.apply {
-            adapter = mRecyclerAdapter
-            layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
-        }
-    }
-
-    // MutableLiveData 를 이용하여 api 호출 결과가 업데이트 된 경우 이를 RecyclerView 에 적용
-    private fun subscribeData() {
-        mMainViewModel.gistsPublicMutableLiveData.observe(this, Observer {
-            mMainViewModel.updateData(it)
-        })
+        val host = supportFragmentManager.findFragmentById(R.id.navHostfragment) as NavHostFragment
+        NavigationUI.setupWithNavController(bottomNavigation, host.navController)
     }
 
     override fun test() {

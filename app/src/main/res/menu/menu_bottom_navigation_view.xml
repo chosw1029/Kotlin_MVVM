@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@id/homeFragment"
+        android:icon="@mipmap/ic_launcher"
+        android:title="@string/tab1" />
+    <item
+        android:id="@id/myPageFragment"
+        android:icon="@mipmap/ic_launcher"
+        android:title="@string/tab2" />
+
+    <item
+        android:id="@+id/tab3"
+        android:icon="@mipmap/ic_launcher"
+        android:title="@string/tab3" />
+</menu>
