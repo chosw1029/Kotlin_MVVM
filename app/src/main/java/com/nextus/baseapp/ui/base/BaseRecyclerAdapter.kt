@@ -58,7 +58,7 @@ open class BaseRecyclerAdapter<T> : RecyclerView.Adapter<BaseRecyclerAdapter.Vie
         return items
     }
 
-    abstract class ViewHolder<T>(
+    open class ViewHolder<T>(
         itemView: View,
         private var baseRecyclerAdapter: BaseRecyclerAdapter<T>
     ): RecyclerView.ViewHolder(itemView), View.OnClickListener {
@@ -67,7 +67,7 @@ open class BaseRecyclerAdapter<T> : RecyclerView.Adapter<BaseRecyclerAdapter.Vie
             itemView.setOnClickListener(this)
         }
 
-        abstract fun populate(item: T, position: Int)
+        open fun populate(item: T, position: Int) {}
 
         override fun onClick(v: View) {
             baseRecyclerAdapter.onItemClickListener?.onItemClick(v, baseRecyclerAdapter.items[adapterPosition], adapterPosition)

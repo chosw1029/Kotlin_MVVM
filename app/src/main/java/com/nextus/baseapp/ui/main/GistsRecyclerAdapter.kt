@@ -33,11 +33,5 @@ class GistsRecyclerAdapter : BaseRecyclerAdapter<GistsPublic>() {
     class EmptyViewHolder(
         itemEmptyBinding: ItemEmptyBinding,
         baseRecyclerAdapter: BaseRecyclerAdapter<GistsPublic>
-    ): ViewHolder<GistsPublic>(itemEmptyBinding.root, baseRecyclerAdapter) {
-
-        override fun populate(item: GistsPublic, position: Int) {
-
-        }
-
-    }
+    ): ViewHolder<GistsPublic>(itemEmptyBinding.root, baseRecyclerAdapter)
 }
