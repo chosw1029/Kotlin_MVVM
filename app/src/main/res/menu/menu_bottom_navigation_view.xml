@@ -2,15 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@id/homeFragment"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_apps_black_24dp"
         android:title="@string/tab1" />
     <item
         android:id="@id/myPageFragment"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_description_black_24dp"
         android:title="@string/tab2" />
 
     <item
         android:id="@+id/tab3"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_directions_run_black_24dp"
         android:title="@string/tab3" />
 </menu>

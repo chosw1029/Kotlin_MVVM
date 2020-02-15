@@ -1,4 +1,4 @@
-package com.nextus.baseapp.ui.main
+package com.nextus.baseapp.ui.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,10 +12,16 @@ class GistsRecyclerAdapter : BaseRecyclerAdapter<GistsPublic>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<GistsPublic> {
         return if(getItemViewType(viewType) == VIEW_TYPE_NORMAL) {
             val binding = ItemGistsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            GistsPublicViewHolder(binding, this)
+            GistsPublicViewHolder(
+                binding,
+                this
+            )
         } else {
             val binding = ItemEmptyBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            EmptyViewHolder(binding, this)
+            EmptyViewHolder(
+                binding,
+                this
+            )
         }
     }
 

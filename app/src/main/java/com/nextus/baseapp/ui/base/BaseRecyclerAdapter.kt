@@ -70,7 +70,8 @@ open class BaseRecyclerAdapter<T> : RecyclerView.Adapter<BaseRecyclerAdapter.Vie
         open fun populate(item: T, position: Int) {}
 
         override fun onClick(v: View) {
-            baseRecyclerAdapter.onItemClickListener?.onItemClick(v, baseRecyclerAdapter.items[adapterPosition], adapterPosition)
+            if(itemViewType != VIEW_TYPE_EMPTY)
+                baseRecyclerAdapter.onItemClickListener?.onItemClick(v, baseRecyclerAdapter.items[adapterPosition], adapterPosition)
         }
 
     }

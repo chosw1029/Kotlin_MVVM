@@ -3,7 +3,7 @@ package com.nextus.baseapp.utils
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.nextus.baseapp.data.model.GistsPublic
-import com.nextus.baseapp.ui.main.GistsRecyclerAdapter
+import com.nextus.baseapp.ui.home.GistsRecyclerAdapter
 
 /**
  * @author ReStartAllKill

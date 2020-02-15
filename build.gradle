@@ -5,21 +5,21 @@ buildscript {
     ext {
         constraintLayoutVersion = '2.0.0-beta4'
         coroutinesVersion = "1.1.1"
-        fragmentVersion = '1.2.0-rc04'
-        gradleVersion = '3.5.1'
+        fragmentVersion = '1.2.1'
+        gradleVersion = '3.5.3'
         glideVersion = '4.10.0'
         kotlinVersion = '1.3.61'
         koinVersion = '2.0.0-GA6'
-        ktxVersion = '1.1.0'
-        lifecycleVersion = '2.2.0-rc03'
-        materialVersion = '1.0.0'
-        navigationVersion = '2.2.0-rc04'
+        ktxVersion = '1.2.0'
+        lifecycleVersion = '2.2.0'
+        materialVersion = '1.1.0'
+        navigationVersion = '2.3.0-alpha01'
         recyclerViewVersion = '1.2.0-alpha01'
         rxandroidVersion = '2.1.0'
         rxjava2Version = '2.2.2'
         rx2FastAndroidNetworking = '1.0.2'
         roomVersion = '2.2.3'
-        supportLibraryVersion = '1.2.0-alpha01'
+        supportLibraryVersion = '1.2.0-alpha02'
         timberVersion = '4.7.1'
     }
 

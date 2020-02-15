@@ -29,15 +29,15 @@ class HomeViewModel(
     }
 
     private fun test() {
-        mIsLoading.set(true)
+        mIsLoading.value = true
         addCompositeDisposable(dataManager.getGistsPublic()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 gistsPublicMutableLiveData.value = it
-                mIsLoading.set(false)
+                mIsLoading.value = false
             }, {
-                mIsLoading.set(false)
+                mIsLoading.value = false
             }))
     }
 

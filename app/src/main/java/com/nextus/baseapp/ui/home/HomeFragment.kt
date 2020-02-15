@@ -9,7 +9,6 @@ import com.nextus.baseapp.BR
 import com.nextus.baseapp.R
 import com.nextus.baseapp.ui.base.BaseFragment
 import com.nextus.baseapp.databinding.FragmentHomeBinding
-import com.nextus.baseapp.ui.main.GistsRecyclerAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -23,7 +22,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     private val mHomeViewModel : HomeViewModel by viewModel()
-    private val mRecyclerAdapter = GistsRecyclerAdapter()
+    private val mRecyclerAdapter =
+        GistsRecyclerAdapter()
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_home
