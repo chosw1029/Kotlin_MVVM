@@ -2,7 +2,7 @@
 
 Android Design Pattern 중 하나인 MVVM Pattern 을 적용하 예제입니다.
 
-## 사용하 기술 및 라이브러리
+## 라이브러리
 > Android Databinding   
 Android Navigation   
 RxJava2 + Android Fast Networking   
