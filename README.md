@@ -17,9 +17,9 @@ Android Design Pattern 중 하나인 MVVM Pattern 을 적용한 예제입니다.
 ## 업데이트 내용
 
 # 2020.06.25
-> Gradle Version 변경   
-> Base 클래스들( BaseViewModel, BaseActivity, BaseFragment, BaseRecyclerAdapter, BaseViewHolder) 의 구조적 변화로 인한 전체 코드 수정   
-> 네트워크 라이브러리 변경 (~~Android Fast Networking~~ => Retrofit2)   
+> Gradle Version 변경  
+> Base 클래스들( BaseViewModel, BaseActivity, BaseFragment, BaseRecyclerAdapter, BaseViewHolder) 의 구조적 변화로 인한 전체 코드 수정  
+> 네트워크 라이브러리 변경 (~~Android Fast Networking~~ => Retrofit2)  
 > Clean Architecture 적용 ( Google Architecture Sample 참조 )
 
 
