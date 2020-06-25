@@ -1,13 +1,17 @@
 package com.nextus.baseapp.ui.home
 
 import android.app.Application
+import android.widget.Toast
 import androidx.databinding.ObservableArrayList
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.nextus.baseapp.data.DataManager
-import com.nextus.baseapp.data.model.GistsPublic
+import androidx.lifecycle.map
+import androidx.lifecycle.viewModelScope
+import com.nextus.baseapp.domain.core.Result
+import com.nextus.baseapp.domain.model.GistsPublic
 import com.nextus.baseapp.ui.base.BaseViewModel
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import com.nextus.baseapp.domain.usecase.GetGistsPublicUseCase
+import kotlinx.coroutines.launch
 
 /**
  * @author ReStartAllKill
@@ -18,27 +22,42 @@ import io.reactivex.schedulers.Schedulers
 
 class HomeViewModel(
     application: Application,
-    private val dataManager: DataManager
-): BaseViewModel<Any>(application) {
+    private val getGistsPublicUseCase: GetGistsPublicUseCase
+): BaseViewModel(application) {
 
     val gistsPublicObservableList = ObservableArrayList<GistsPublic>()
-    val gistsPublicMutableLiveData = MutableLiveData<List<GistsPublic>>()
+
+    private val _gistsPublicDataList = MutableLiveData<List<GistsPublic>>()
+    val gistsPublicDataList: LiveData<List<GistsPublic>> = _gistsPublicDataList
+
+    val isRefreshing: LiveData<Boolean> = gistsPublicDataList.map { false }
 
     init {
-        test()
+        getGistsPublic()
     }
 
-    private fun test() {
-        mIsLoading.value = true
-        addCompositeDisposable(dataManager.getGistsPublic()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                gistsPublicMutableLiveData.value = it
-                mIsLoading.value = false
-            }, {
-                mIsLoading.value = false
-            }))
+    fun refresh() {
+
+    }
+
+    fun getGistsPublic() {
+        viewModelScope.launch {
+            getGistsPublicUseCase().let { result ->
+                if(result is Result.Success) {
+                    onGistsPublicLoaded(result.data)
+                } else {
+                    onGistsPublicFailed(result as Result.Error)
+                }
+            }
+        }
+    }
+
+    private fun onGistsPublicLoaded(result: List<GistsPublic>) {
+        _gistsPublicDataList.value = result
+    }
+
+    private fun onGistsPublicFailed(result: Result.Error) {
+        Toast.makeText(getApplication(), result.exception.toString(), Toast.LENGTH_SHORT).show()
     }
 
     fun updateData(gistsPublicList: List<GistsPublic>) {

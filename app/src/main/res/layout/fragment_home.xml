@@ -11,13 +11,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/gistsPublicRecycler"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:gistsPublicListAdapter="@{viewModel.gistsPublicObservableList}"/>
+            app:isRefreshing="@{viewModel.isRefreshing}"
+            app:onRefresh="@{viewModel::getGistsPublic}">
 
-        <FrameLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/gistsPublicRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"/>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <!--<FrameLayout
             android:id="@+id/outer"
             android:background="#aa000000"
             android:layout_width="match_parent"
@@ -31,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"/>
 
-        </FrameLayout>
+        </FrameLayout>-->
 
     </FrameLayout>
 </layout>

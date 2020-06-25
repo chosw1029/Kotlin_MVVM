@@ -2,14 +2,15 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'androidx.navigation.safeargs'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion build_versions.compile_sdk
+    buildToolsVersion build_versions.build_tools
     defaultConfig {
         applicationId "com.nextus.baseapp"
-        minSdkVersion 15
-        targetSdkVersion 29
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -27,12 +28,61 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
     dataBinding {
         enabled = true
     }
 }
 
 dependencies {
+
+    implementation deps.kotlin.stdlib
+
+    // Jetpack
+    implementation deps.androidx.appcompat
+    implementation deps.androidx.core_ktx
+    implementation deps.androidx.constraintlayout
+    implementation deps.androidx.lifecycle.runtime_ktx
+    implementation deps.androidx.lifecycle.extensions
+    implementation deps.androidx.lifecycle.viewmodel_ktx
+    implementation deps.androidx.lifecycle.livedata_ktx
+    implementation deps.androidx.navigation.fragment_ktx
+    implementation deps.androidx.navigation.ui_ktx
+    implementation deps.androidx.material
+    implementation deps.androidx.swiperefresh
+
+    // coroutine
+    implementation deps.kotlin.coroutines.core
+    implementation deps.kotlin.coroutines.android
+    implementation deps.kotlin.coroutines.play_services
+
+    // retrofit
+    implementation deps.retrofit.core
+    implementation deps.retrofit.converter_gson
+    implementation deps.retrofit.adapter_rxjava2
+
+    // koin
+    implementation deps.koin.core
+    implementation deps.koin.viewModel
+
+    // okhttp
+    implementation deps.okhttp.core
+    implementation deps.okhttp.logging_interceptor
+
+    // debugging
+    implementation deps.debugging.timber
+
+    // test
+    testImplementation deps.atsl.junit
+    androidTestImplementation deps.atsl.ext_junit
+    androidTestImplementation deps.atsl.espresso_core
+    testImplementation deps.kotlin.coroutines.test
+    /*
+
+
     //implementation fileTree(dir: 'libs', include: ['*.jar'])
     kapt "androidx.room:room-compiler:$rootProject.roomVersion"
     kapt "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
@@ -48,7 +98,7 @@ dependencies {
     //annotationProcessor "androidx.lifecycle:lifecycle-compiler:$rootProject.lifecycleVersion"
     implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
-    implementation "androidx.recyclerview:recyclerview:$rootProject.recyclerViewVersion"
+        implementation "androidx.recyclerview:recyclerview:$rootProject.recyclerViewVersion"
     implementation "androidx.room:room-runtime:$rootProject.roomVersion"
 
     implementation "com.amitshekhar.android:rx2-android-networking:$rootProject.rx2FastAndroidNetworking"
@@ -64,7 +114,13 @@ dependencies {
     implementation "org.koin:koin-androidx-scope:$rootProject.koinVersion"
     implementation "org.koin:koin-androidx-viewmodel:$rootProject.koinVersion"
 
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-jackson:$rootProject.retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofitVersion"
+
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'*/
 }

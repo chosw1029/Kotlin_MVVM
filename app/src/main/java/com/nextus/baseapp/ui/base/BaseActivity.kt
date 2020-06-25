@@ -5,40 +5,32 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import com.nextus.baseapp.ui.main.MainViewModel
+import androidx.lifecycle.ViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.reflect.KClass
+import com.nextus.baseapp.BR
 
-abstract class BaseActivity<T: ViewDataBinding, V: BaseViewModel<*>> : AppCompatActivity(), BaseFragment.CallBack {
+abstract class BaseActivity<B: ViewDataBinding, VM: ViewModel>(
+    @LayoutRes private val layoutResId: Int,
+    clazz: KClass<VM>
+) : AppCompatActivity(), BaseFragment.CallBack {
 
-    private lateinit var mViewDataBinding: T
+    protected lateinit var mViewDataBinding: B
+    protected val viewModel : VM by viewModel(clazz)
 
-    @LayoutRes
-    abstract fun getLayoutId(): Int
-
-    abstract fun getViewModel(): V
-
-    /**
-     * Binding 을 위한 함수
-     */
-    abstract fun getBindingVariable(): Int
-
-    abstract fun setUp()
+    abstract fun onCreate()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         performDataBinding()
-        setUp()
+        onCreate()
     }
 
     private fun performDataBinding() {
-        mViewDataBinding = DataBindingUtil.setContentView(this, getLayoutId())
+        mViewDataBinding = DataBindingUtil.setContentView(this, layoutResId)
         mViewDataBinding.lifecycleOwner = this
-        mViewDataBinding.setVariable(getBindingVariable(), getViewModel())
+        mViewDataBinding.setVariable(BR.viewModel, viewModel)
         mViewDataBinding.executePendingBindings()
-    }
-
-    fun getViewDataBinding() : T {
-        return mViewDataBinding
     }
 
     override fun onFragmentAttached() {

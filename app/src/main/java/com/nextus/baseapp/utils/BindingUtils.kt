@@ -1,9 +1,7 @@
 package com.nextus.baseapp.utils
 
 import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.RecyclerView
-import com.nextus.baseapp.data.model.GistsPublic
-import com.nextus.baseapp.ui.home.GistsRecyclerAdapter
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
 /**
  * @author ReStartAllKill
@@ -12,14 +10,14 @@ import com.nextus.baseapp.ui.home.GistsRecyclerAdapter
  * @updated on
  */
 object BindingUtils {
-
     @JvmStatic
-    @BindingAdapter("gistsPublicListAdapter")
-    fun setGistsPublicListAdapter(recyclerView: RecyclerView, gistsPublicList: List<GistsPublic>) {
-        if(recyclerView.adapter != null) {
-            val adapter : GistsRecyclerAdapter = recyclerView.adapter as GistsRecyclerAdapter
-            adapter.updateList(gistsPublicList)
-        }
+    @BindingAdapter("isRefreshing")
+    fun SwipeRefreshLayout.bindRefreshing(isRefreshing: Boolean) {
+        this.isRefreshing = isRefreshing
     }
 
+    @JvmStatic
+    @BindingAdapter("onRefresh")
+    fun SwipeRefreshLayout.bindRefreshListener(onRefreshListener: SwipeRefreshLayout.OnRefreshListener) =
+        setOnRefreshListener(onRefreshListener)
 }

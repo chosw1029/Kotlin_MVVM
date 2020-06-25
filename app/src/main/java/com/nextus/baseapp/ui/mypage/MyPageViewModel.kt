@@ -1,7 +1,7 @@
 package com.nextus.baseapp.ui.mypage
 
 import android.app.Application
-import com.nextus.baseapp.data.DataManager
+import com.nextus.baseapp.data.RemoteClient
 import com.nextus.baseapp.ui.base.BaseViewModel
 
 /**
@@ -10,6 +10,6 @@ import com.nextus.baseapp.ui.base.BaseViewModel
  * @modified by
  * @updated on
  */
-class MyPageViewModel(application: Application, dataManager: DataManager) : BaseViewModel<Any>(application) {
+class MyPageViewModel(application: Application, remoteClient: RemoteClient) : BaseViewModel(application) {
 
 }

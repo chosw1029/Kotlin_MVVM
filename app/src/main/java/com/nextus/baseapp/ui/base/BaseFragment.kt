@@ -9,6 +9,10 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
+import com.nextus.baseapp.BR
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.reflect.KClass
 
 /**
  * @author ReStartAllKill
@@ -16,19 +20,14 @@ import androidx.fragment.app.Fragment
  * @modified by
  * @updated on
  */
-abstract class BaseFragment<T: ViewDataBinding, V: BaseViewModel<*>> : Fragment() {
+abstract class BaseFragment<B: ViewDataBinding, VM: ViewModel>(
+    @LayoutRes private val layoutResId: Int,
+    clazz: KClass<VM>
+) : Fragment() {
 
-    private lateinit var mViewDataBinding: T
+    private lateinit var mViewDataBinding: B
+    protected val viewModel : VM by viewModel(clazz)
     private var mActivity: BaseActivity<*, *>? = null
-
-    @LayoutRes
-    abstract fun getLayoutId(): Int
-
-    abstract fun getBindingVariable(): Int
-
-    abstract fun getViewModel(): V
-
-    abstract fun setUp()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -38,23 +37,25 @@ abstract class BaseFragment<T: ViewDataBinding, V: BaseViewModel<*>> : Fragment(
         }
     }
 
+    abstract fun onCreate()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true) // Fragment Option Menu 사용
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        mViewDataBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
+        mViewDataBinding = DataBindingUtil.inflate(inflater, layoutResId, container, false)
         return mViewDataBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mViewDataBinding.setVariable(getBindingVariable(), getViewModel())
+        mViewDataBinding.setVariable(BR.viewModel, viewModel)
         mViewDataBinding.lifecycleOwner = this
         mViewDataBinding.executePendingBindings()
 
-        setUp()
+        onCreate()
     }
 
     fun getBaseActivity() : BaseActivity<*, *>? {
