@@ -8,13 +8,14 @@ import kotlinx.coroutines.withContext
 import java.lang.Exception
 
 class GitRemoteDataSource(private val gitApi: GitApi): GitDataSource {
+
     override suspend fun getGistsPublic(): Result<List<GistsPublic>> {
         return withContext(Dispatchers.IO) {
             try {
                 val response = gitApi.getGistsPublic().execute()
 
                 if(response.isSuccessful) {
-                    return@withContext Result.Success(response.body()!!)
+                    return@withContext Result.Success(response.body() ?: ArrayList())
                 } else {
                     return@withContext Result.Error(Exception("Network Error"))
                 }
@@ -24,4 +25,5 @@ class GitRemoteDataSource(private val gitApi: GitApi): GitDataSource {
             }
         }
     }
+
 }
