@@ -7,6 +7,8 @@ Android Design Pattern 중 하나인 MVVM Pattern 을 적용한 예제입니다.
 > Android Navigation   
 > RxJava2 + Retrofit2   
 > Koin
+> Coroutine ( Flow )
+> Android LiveData
 
 ## 업데이트 예정
 > Android Navigation 심화 ( BackStack 관련 )   
@@ -16,7 +18,12 @@ Android Design Pattern 중 하나인 MVVM Pattern 을 적용한 예제입니다.
 
 ## 업데이트 내용
 
-# 2020.06.25
+* 2020.07.28
+> 일부 필요 없는 코드 제거
+> Coroutine Flow 적용
+> ExperimentalCoroutinesApi 관련 어노테이션 제거
+
+* 2020.06.25
 > Gradle Version 변경  
 > Base 클래스들( BaseViewModel, BaseActivity, BaseFragment, BaseRecyclerAdapter, BaseViewHolder) 의 구조적 변화로 인한 전체 코드 수정  
 > 네트워크 라이브러리 변경 (~~Android Fast Networking~~ => Retrofit2)  

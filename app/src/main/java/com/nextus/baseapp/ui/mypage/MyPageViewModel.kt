@@ -10,6 +10,6 @@ import com.nextus.baseapp.ui.base.BaseViewModel
  * @modified by
  * @updated on
  */
-class MyPageViewModel(application: Application, remoteClient: RemoteClient) : BaseViewModel(application) {
+class MyPageViewModel(application: Application) : BaseViewModel(application) {
 
 }

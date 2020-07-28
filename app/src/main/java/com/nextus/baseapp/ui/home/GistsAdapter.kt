@@ -13,7 +13,7 @@ class GistsAdapter : BaseRecyclerAdapter<GistsPublic>(DiffCallback()) {
         }
 
         override fun areContentsTheSame(oldItem: GistsPublic, newItem: GistsPublic): Boolean {
-            return oldItem.url == newItem.url
+            return oldItem == newItem
         }
     }
 

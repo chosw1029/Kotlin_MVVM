@@ -9,6 +9,7 @@ import com.nextus.baseapp.R
 import com.nextus.baseapp.databinding.FragmentHomeBinding
 import com.nextus.baseapp.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 /**
  * @author ReStartAllKill

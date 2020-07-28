@@ -16,7 +16,7 @@ import org.koin.dsl.module
 val viewModelModule = module {
     viewModel { MainViewModel(get()) }
     viewModel { HomeViewModel(get(), get()) }
-    viewModel { MyPageViewModel(get(), get()) }
+    viewModel { MyPageViewModel(get()) }
 }
 
 val remoteModule = module {

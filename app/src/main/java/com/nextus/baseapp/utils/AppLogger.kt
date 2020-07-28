@@ -36,9 +36,7 @@ object AppLogger {
     }
 
     fun init() {
-        if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
-        }
+        Timber.plant(Timber.DebugTree())
     }
 
     fun w(s: String, vararg objects: Any) {
